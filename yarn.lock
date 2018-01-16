@@ -2830,6 +2830,12 @@ lodash.mergewith@^4.6.0:
   version "4.6.0"
   resolved "https://registry.yarnpkg.com/lodash.mergewith/-/lodash.mergewith-4.6.0.tgz#150cf0a16791f5903b8891eab154609274bdea55"
 
+lodash.product@^18.1.16:
+  version "18.1.16"
+  resolved "https://registry.yarnpkg.com/lodash.product/-/lodash.product-18.1.16.tgz#3de9b646acb96f5037b6cd1948510154d6a991f7"
+  dependencies:
+    lodash "^4.17.4"
+
 lodash.tail@^4.1.1:
   version "4.1.1"
   resolved "https://registry.yarnpkg.com/lodash.tail/-/lodash.tail-4.1.1.tgz#d2333a36d9e7717c8ad2f7cacafec7c32b444664"
@@ -4850,8 +4856,8 @@ uuid@^3.0.0:
   resolved "https://registry.yarnpkg.com/uuid/-/uuid-3.1.0.tgz#3dd3d3e790abc24d7b0d3a034ffababe28ebbc04"
 
 uuid@^3.1.0:
-  version "3.2.0"
-  resolved "https://registry.yarnpkg.com/uuid/-/uuid-3.2.0.tgz#19a63e22b3b32a0ba23984a4f384836465e24949"
+  version "3.2.1"
+  resolved "https://registry.yarnpkg.com/uuid/-/uuid-3.2.1.tgz#12c528bb9d58d0b9265d9a2f6f0fe8be17ff1f14"
 
 validate-npm-package-license@^3.0.1:
   version "3.0.1"

@@ -6,6 +6,7 @@ import * as actions from '../actions/stackActions';
 import * as Constants from '../utils/constants'
 import {bindActionCreators} from 'redux';
 import {connect} from 'react-redux';
+import {generateState} from '../utils/helper';
 
 
 
@@ -13,6 +14,8 @@ class Game extends Component{
   componentDidMount(){
       console.log(this.props);
       this.props.actions.actionThrower();
+      console.log("deck");
+      console.log(generateState());
   }
 
   render(){

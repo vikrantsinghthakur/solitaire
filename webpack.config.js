@@ -1,6 +1,7 @@
 var webpack = require('webpack');
 var path = require('path');
 var CopyWebpackPlugin = require('copy-webpack-plugin');
+var WriteFileWebpackPlugin = require('write-file-webpack-plugin');
 var webpack = require('webpack');
 
 
@@ -19,6 +20,10 @@ var config = {
         test : /\.jsx?/,
         include : APP_DIR,
         loader : 'babel-loader'
+      },
+      {
+        test : /\.scss$/,
+        loaders: ['style-loader', 'css-loader', 'sass-loader']
       }
     ]
   },
@@ -33,7 +38,10 @@ var config = {
     hot: true
   },
   plugins : [
-    new CopyWebpackPlugin([{from: 'src/client/index.html', to:'./..'}]),
+    new WriteFileWebpackPlugin({
+          test: /^(?!.*(hot)).*/,
+    }),
+    new CopyWebpackPlugin([{from: 'src/client/index.html'},{from:'src/client/app/assets', to:'./assets'}]),
     new webpack.NamedModulesPlugin(),
     new webpack.HotModuleReplacementPlugin()
   ]

@@ -1,4 +1,9 @@
 import React from 'react'
-const App = ()=> <p>Eye of theasdasdasd tige1asdasdasdasdasdasdasdasd212122r</p>
+import Card from './Card'
+const App = ()=>
+  <div>
+    <p>Eye of theasdasdasd tige1asdasdasdasdasdasdasdasd212122r</p>
+    <Card value="2" suite="hearts"/>
+  </div>
 
 export default App;

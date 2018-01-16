@@ -1,0 +1,10 @@
+body{
+  background-color: green;
+}
+.stack {
+  display: inline-block;
+  &.suite {
+    display: inline-block;
+    float: right;
+  }
+}

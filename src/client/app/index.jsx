@@ -3,13 +3,15 @@ import { render } from 'react-dom'
 import { Provider } from 'react-redux'
 import { createStore } from 'redux'
 import stackReducer from './reducers/stackReducer'
-import App from './components/App'
+import Container from './containers/rootContainer'
+import {fromJS} from 'immutable'
 
-let store = createStore(stackReducer)
+let initialState = fromJS({})
+let store = createStore(stackReducer,initialState);
 
 render(
   <Provider store={store}>
-    <App />
+    <Container />
   </Provider>,
   document.getElementById('root')
 )

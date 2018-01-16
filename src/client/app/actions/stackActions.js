@@ -1,5 +1,13 @@
-import constants from '../constants/constants';
-console.log(constants.TEST);
+import * as Constants from '../utils/constants';
 
+export const actionThrower = () =>
+{return {
+  type: 'actionThrower',
+  value: '99'
+}}
 
-export default stackActions;
+export const newGame = () => {
+  return{
+    type: Constants.NEW_GAME
+  }
+}

@@ -1,7 +1,9 @@
 import React,{Component} from 'react';
 import { DragSource,DropTarget } from 'react-dnd';
+import {connect} from 'react-redux';
 import Card from './Card';
-import { STACKS,SUITE_COLOR,SUITE } from '../utils/constants';
+import * as actions from '../actions/stackActions';
+import { STACKS,SUITE_COLOR,SUITE,CARD_VALUES } from '../utils/constants';
 
 const types = "Card";
 const dragSpec = {
@@ -17,9 +19,11 @@ const dragSpec = {
 		const item = monitor.getItem()
 		const dropResult = monitor.getDropResult()
 
-		if (dropResult) {
-			alert(dropResult.dropped + item.dragValue) // eslint-disable-line no-alert
-		}
+		if(dropResult.stack == STACKS.SUITE) {
+
+    } else if (dropResult.stack == STACKS.play) {
+      
+    }
 	},
   canDrag(props,monitor) {
     return props.suite != SUITE.NONE;
@@ -43,20 +47,22 @@ const dropSpec = {
 
     if(props.stack == STACKS.PLAY){
       if(SUITE_COLOR[item.dragSuite] != SUITE_COLOR[props.suite] &&
-      props.value - item.dragValue == 1)
+      CARD_VALUES[props.value] - CARD_VALUES[item.dragValue] == 1)
         return true;
     }
 
     if(props.stack == STACKS.SUITE){
-      if(SUITE_COLOR[item.dragSuite] == SUITE_COLOR[props.suite] &&
-      item.dragValue - props.value == 1)
+      if(item.dragSuite == props.suite &&
+      CARD_VALUES[item.dragValue] - CARD_VALUES[props.value] == 1)
         return true;
     }
 
     return false;
   },
   drop(props, monitor, component){
-    return {stack: props.stack};
+    return {stack: props.stack,
+            dropIndex: props.key,
+            parentSuite: props.parentSuite};
   }
 };
 
@@ -83,4 +89,10 @@ class CardWrapper extends Component {
 CardWrapper = DragSource(types, dragSpec, dragCollect)(CardWrapper);
 CardWrapper = DropTarget(types, dropSpec, dropCollect)(CardWrapper);
 
-export default CardWrapper;
+const mapDispatchToProps = (dispatch) => {
+  return {
+    actions: bindActionCreators(actions,dispatch)
+  }
+}
+
+export default connect(null,mapDispatchToProps)(CardWrapper);

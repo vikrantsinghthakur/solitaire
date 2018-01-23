@@ -14,13 +14,6 @@ import {STACKS,SUITE} from '../utils/constants';
 
 
 class Game extends Component{
-  componentDidMount(){
-      console.log(this.props);
-      this.props.actions.newGame();
-      console.log("deck");
-      console.log(generateState());
-  }
-
   render(){
     console.log(`PROPS = ${JSON.stringify(this.props)}`);
     let drawStackProps = null,suiteStackProps = null,playStackProps=null;
@@ -85,10 +78,4 @@ const mapStateToProps = (state) => {
   }
 }
 
-const mapDispatchToProps = (dispatch) => {
-  return {
-    actions: bindActionCreators(actions,dispatch)
-  }
-}
-
-export default connect(mapStateToProps,mapDispatchToProps)(Game);
+export default connect(mapStateToProps,null)(Game);

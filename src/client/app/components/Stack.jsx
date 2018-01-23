@@ -13,7 +13,8 @@ import { STACKS } from '../utils/constants';
      separator = <Separator/>
      if(props.activeStack && props.activeStack.length > 0){
        let cardsToRender = props.activeStack.reverse();
-       primaryRender = () => <CardWrapper cardsToRender={cardsToRender} {...props} zIndex={0}/>
+       primaryRender = () => <CardWrapper cardsToRender={cardsToRender} {...props}
+                                key={counter++} zIndex={0}/>
      }
    } else if(props.stack == STACKS.SUITE && props.suiteStackProps){
      stackClass = `${stackClass} suite`
@@ -33,7 +34,7 @@ import { STACKS } from '../utils/constants';
      stackClass = `${stackClass} play`
      let primaryRenderArray = [];
      let cardsToRender = null;
-     let counter = 0;
+     let counter = 1;
      for(let playStackIndex in props.playStackProps){
        if(props.playStackProps.hasOwnProperty(playStackIndex)){
          cardsToRender = props.playStackProps[playStackIndex.toString()];

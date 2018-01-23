@@ -1,12 +1,20 @@
 /*Asset Constants*/
 export const SUITE = {
+    NONE: "NONE",
     HEARTS: "HEARTS",
     CLUBS: "CLUBS",
     DIAMONDS: "DIAMONDS",
     SPADES: "SPADES"
 }
 
-export const SUITE_COLORS = {
+export const CARD_SUITE = {
+  HEARTS: "HEARTS",
+  CLUBS: "CLUBS",
+  DIAMONDS: "DIAMONDS",
+  SPADES: "SPADES"
+}
+
+export const SUITE_COLOR = {
   HEARTS: "RED",
   CLUBS: "BLACK",
   DIAMONDS: "RED",
@@ -32,6 +40,17 @@ export const CARD_VALUES = {
 export const CARD_FACE = {
   OPEN:'OPEN',
   CLOSED: 'CLOSED'
+}
+
+export const STACKS = {
+  PLAY: 'PLAY',
+  SUITE: 'SUITE',
+  DRAW: 'DRAW'
+}
+
+export const DIFFICULTY = {
+  EASY:'EASY',
+  HARD: 'HARD'
 }
 
 /*Action Constants*/

@@ -1,3 +1,5 @@
+@import "variables";
+
 body{
   background-color: green;
 }
@@ -7,4 +9,29 @@ body{
     display: inline-block;
     float: right;
   }
+  &.draw {
+    display: inline-block;
+  }
+  &.play{
+    display: flex;
+    width: 100%;
+    justify-content: space-between;
+  }
+}
+
+.cardWrapper {
+  position: relative;
+  display: inline-block;
+  &.playStack {
+    top: -125px;
+  }
+}
+
+.separator{
+  display: inline-block;
+  width: $suite_separator_width;
+}
+
+.playAreaSeparator{
+  height: $play_area_separator_height;
 }

@@ -1,20 +1,20 @@
 import React from 'react';
 import CardWrapper from './CardWrapper';
 import Separator from './Separator';
-import { STACKS } from '../utils/constants';
+import { STACKS,DIFFICULTY,SUITE } from '../utils/constants';
 
- // const Stack = (props) => <CardWrapper {...props} zIndex={0} />
  const Stack = (props) => {
    let auxRender = null, separator=null, stackClass="stack";
    let primaryRender = () => null
-   if(props.stack == STACKS.DRAW && (props.passiveStack || props.activeStack)){
+   if(props.stack == STACKS.DRAW){
      stackClass = `${stackClass} draw`
-     auxRender = (<CardWrapper value="card" suite="down"/>);
+     auxRender = (<CardWrapper value="card" suite="down" suite={SUITE.NONE} cardDrawer={true} {...props}/>);
      separator = <Separator/>
      if(props.activeStack && props.activeStack.length > 0){
-       let cardsToRender = props.activeStack.reverse();
-       primaryRender = () => <CardWrapper cardsToRender={cardsToRender} {...props}
-                                key={counter++} zIndex={0}/>
+       let activeDrawCount = props.difficulty == DIFFICULTY.HARD ? 3: 1;
+       let cardsToRender = props.activeStack.slice(-activeDrawCount,), counter = cardsToRender.length;
+       primaryRender = () => cardsToRender.map((card) => <CardWrapper cardsToRender={[card]} {...props}
+                                key={counter--}/>)
      }
    } else if(props.stack == STACKS.SUITE && props.suiteStackProps){
      stackClass = `${stackClass} suite`
@@ -38,7 +38,7 @@ import { STACKS } from '../utils/constants';
      for(let playStackIndex in props.playStackProps){
        if(props.playStackProps.hasOwnProperty(playStackIndex)){
          cardsToRender = props.playStackProps[playStackIndex.toString()];
-         primaryRenderArray.push(<CardWrapper key={counter++}
+         primaryRenderArray.push(<CardWrapper stackKey={counter} key={counter++}
                                   cardsToRender={cardsToRender} {...props}/>)
        }
      }

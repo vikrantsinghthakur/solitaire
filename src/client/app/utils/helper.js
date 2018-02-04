@@ -1,4 +1,4 @@
-import {CARD_SUITE,CARD_VALUES,CARD_FACE,DIFFICULTY} from './constants'
+import {CARD_SUITE,CARD_VALUES,CARD_FACE,DIFFICULTY,STACKS} from './constants'
 import _ from 'lodash';
 import 'lodash.product';
 
@@ -12,31 +12,31 @@ const shuffleArray = (array) => {
 
 export const generateState = () => {
     let state = {};
-    state.drawStack = {activeStack:[], passiveStack:[]};
-    state.suiteStack = {};
-    state.playStack = {};
+    state[STACKS.DRAW] = {activeStack:[], passiveStack:[]};
+    state[STACKS.SUITE] = {};
+    state[STACKS.PLAY] = {};
 
     let suiteArray = Object.keys(CARD_SUITE);
     let cardArray = Object.keys(CARD_VALUES);
 
     let fullDeck = _.product(suiteArray,cardArray);
     fullDeck = shuffleArray(fullDeck.map((item) => {return {suite:item[0],
-                                        value:item[1], face:CARD_FACE.CLOSED}}));
+                                        value:item[1]}}));
 
     for(let i of _.range(1,8)){
-      state.playStack[i]=[];
+      state[STACKS.PLAY][i]=[];
         for(var j=1; j<=i; j++){
           let temp = fullDeck.pop();
-          if(i==j)
-            temp.face=CARD_FACE.OPEN;
-          state.playStack[i].push(temp);
+          if(i!=j)
+            temp.face=CARD_FACE.CLOSED;
+          state[STACKS.PLAY][i].push(temp);
         }
     }
 
     while(fullDeck.length>0)
-      state.drawStack.passiveStack.push(fullDeck.pop());
+      state[STACKS.DRAW].passiveStack.push(fullDeck.pop());
 
-    state.suiteStack = {
+    state[STACKS.SUITE] = {
       "HEARTS":[{value:"card", suite:"down"}],
       "CLUBS":[{value:"card", suite:"down"}],
       "DIAMONDS":[{value:"card", suite:"down"}],

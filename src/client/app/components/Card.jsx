@@ -1,6 +1,6 @@
 import React,{Component} from 'react';
 import CardWrapper from './CardWrapper';
-import {STACKS,DIFFICULTY,SUITE} from '../utils/constants';
+import {STACKS,DIFFICULTY,SUITE,CARD_FACE} from '../utils/constants';
 
 const Card = (props) => {
     let separator = null,
@@ -8,28 +8,42 @@ const Card = (props) => {
     cards = null,
     nextCards = null,
     value = null,
-    suite = null;
+    suite = null,
+    onClickFunction= () => {}
 
     if(props.stack == STACKS.PLAY && props.suite != SUITE.NONE){
       if(props.cardsToRender && props.cardsToRender.length > 0){
         currentCard = props.cardsToRender[0];
-        value = currentCard.value;
-        suite = currentCard.suite;
-        nextCards = props.cardsToRender.splice(1,);
+        nextCards = props.cardsToRender.slice(1,);
+        if(currentCard.face == CARD_FACE.CLOSED){
+          value = "card";
+          suite = "down";
+        } else {
+          value = currentCard.value;
+          suite = currentCard.suite;
+        }
+      } else {
+        value = "card";
+        suite = "down";
       }
     } else if(props.stack == STACKS.DRAW && props.difficulty == DIFFICULTY.HARD) {
+      console.log(props.cardDrawer);
       if(props.cardsToRender && props.cardsToRender.length > 0){
         currentCard = props.cardsToRender[0];
         value = currentCard.value;
         suite = currentCard.suite;
-        nextCards = props.cardsToRender.splice(1,);
+        nextCards = props.cardsToRender.slice(1,);
+      } else if(props.cardDrawer){
+        value = "card";
+        suite = "down";
+        onClickFunction = props.actions.drawCard;
       }
     } else if(props.stack == STACKS.SUITE){
       if(props.cardsToRender && props.cardsToRender.length > 0){
         currentCard = props.cardsToRender[0];
         value = currentCard.value;
         suite = currentCard.suite;
-        nextCards = props.cardsToRender.splice(1,);
+        nextCards = props.cardsToRender.slice(1,);
       }
     } else if(props.suite && props.value){
       suite = props.suite;
@@ -37,7 +51,7 @@ const Card = (props) => {
     }
 
 
-    return (<div style={{"display":"inline-block", "maxWidth" : "100px"}}>
+    return (<div onClick={onClickFunction} style={{"display":"inline-block", "maxWidth" : "100px"}}>
               <img style={{"maxWidth" : "100%"}}
                 src={`../assets/${value}_of_${suite}.png`}/>
               {nextCards && nextCards.length> 0 ? <CardWrapper {...props}

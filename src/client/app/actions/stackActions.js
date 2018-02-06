@@ -1,4 +1,5 @@
 import * as Constants from '../utils/constants';
+import {checkUndefined} from '../utils/helper';
 
 export const actionThrower = () =>
 {return {
@@ -15,6 +16,13 @@ export const newGame = () => {
 export const drawCard = () => {
   return{
     type: Constants.DRAW_CARD
+  }
+}
+
+export const moveCard = (actionObject) => {
+  return {
+    type: Constants.MOVE_CARD,
+    ...actionObject
   }
 }
 

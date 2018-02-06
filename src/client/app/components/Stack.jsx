@@ -8,13 +8,22 @@ import { STACKS,DIFFICULTY,SUITE } from '../utils/constants';
    let primaryRender = () => null
    if(props.stack == STACKS.DRAW){
      stackClass = `${stackClass} draw`
-     auxRender = (<CardWrapper value="card" suite="down" suite={SUITE.NONE} cardDrawer={true} {...props}/>);
+     auxRender = (<CardWrapper value="card" suite="down" suite={SUITE.NONE}
+       cardDrawer={true} {...props}/>);
      separator = <Separator/>
      if(props.activeStack && props.activeStack.length > 0){
        let activeDrawCount = props.difficulty == DIFFICULTY.HARD ? 3: 1;
-       let cardsToRender = props.activeStack.slice(-activeDrawCount,), counter = cardsToRender.length;
-       primaryRender = () => cardsToRender.map((card) => <CardWrapper cardsToRender={[card]} {...props}
-                                key={counter--}/>)
+       let cardsToRender = props.activeStack.slice(-activeDrawCount,),
+       length = cardsToRender.length, counter = 1;
+       primaryRender = () => cardsToRender.map((card) => {
+         let lastCard, isLastCard;
+         lastCard = props.activeStack[props.activeStack.length -1];
+         if(card.suite == lastCard.suite && card.value == lastCard.value)
+          isLastCard = true;
+         else
+          isLastCard = false;
+         return <CardWrapper
+            cardsToRender={[card]} {...props} isLastCard={isLastCard} key={counter++} />})
      }
    } else if(props.stack == STACKS.SUITE && props.suiteStackProps){
      stackClass = `${stackClass} suite`
@@ -25,7 +34,7 @@ import { STACKS,DIFFICULTY,SUITE } from '../utils/constants';
        if(props.suiteStackProps.hasOwnProperty(key)){
          cardsToRender = props.suiteStackProps[key];
          primaryRenderArray.push(<CardWrapper parentSuite={key}
-           cardsToRender={cardsToRender} {...props} zIndex={0} key={counter++}/>)
+           cardsToRender={cardsToRender} {...props} key={counter++}/>)
          primaryRenderArray.push(<Separator key={counter++}/>)
        }
      }
@@ -38,8 +47,13 @@ import { STACKS,DIFFICULTY,SUITE } from '../utils/constants';
      for(let playStackIndex in props.playStackProps){
        if(props.playStackProps.hasOwnProperty(playStackIndex)){
          cardsToRender = props.playStackProps[playStackIndex.toString()];
+         let emptyStack;
+         if(cardsToRender.length == 0)
+          emptyStack = true;
+         else
+          emptyStack = false;
          primaryRenderArray.push(<CardWrapper stackKey={counter} key={counter++}
-                                  cardsToRender={cardsToRender} {...props}/>)
+            emptyStack={emptyStack} cardsToRender={cardsToRender} {...props}/>)
        }
      }
      primaryRender = () => primaryRenderArray.map(element => element);

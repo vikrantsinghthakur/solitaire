@@ -10,6 +10,10 @@ const shuffleArray = (array) => {
     return array;
 }
 
+export const checkUndefined = (value) => {
+  return value ? value : null;
+}
+
 export const generateState = () => {
     let state = {};
     state[STACKS.DRAW] = {activeStack:[], passiveStack:[]};
@@ -37,16 +41,14 @@ export const generateState = () => {
       state[STACKS.DRAW].passiveStack.push(fullDeck.pop());
 
     state[STACKS.SUITE] = {
-      "HEARTS":[{value:"card", suite:"down"}],
-      "CLUBS":[{value:"card", suite:"down"}],
-      "DIAMONDS":[{value:"card", suite:"down"}],
-      "SPADES":[{value:"card", suite:"down"}]
+      "HEARTS":[],
+      "CLUBS":[],
+      "DIAMONDS":[],
+      "SPADES":[]
     }
 
     ////
     state.difficulty = DIFFICULTY.HARD;
     ////
-
     return state;
-
 }

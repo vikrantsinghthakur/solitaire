@@ -59,6 +59,7 @@ export const MOVE_TO_PLAY_STACK = "moveToPlayStack";
 export const MOVE_TO_SUITE_STACK = "moveToSuiteStack";
 export const OPEN_CARD_FACE = "openCardFace";
 export const DRAW_CARD = "drawCard";
+export const MOVE_CARD = "moveCard";
 
 /*CSS Constants*/
 export const SUITE_SEPARATOR_WIDTH = "1vw";

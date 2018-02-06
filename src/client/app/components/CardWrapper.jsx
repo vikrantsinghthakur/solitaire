@@ -20,18 +20,27 @@ const dragSpec = {
 		const item = monitor.getItem()
 		const dropResult = monitor.getDropResult()
 
-		if(dropResult && dropResult.stack == STACKS.SUITE) {
-      //get source stack(type,index/suite), get cardsToRender array
-
-    } else if ( dropResult && dropResult.stack == STACKS.PLAY) {
-      props.actions.moveToPlayStack(dropResult.stack, dropResult.dropIndex,
-        dropResult.parentSuite, props.cardsToRender,
-        props.stack, props.stackKey);
+    if(dropResult){
+      let cardsArray = props.stack == STACKS.PLAY ?
+      props.cardsToRender : props.cardsToRender.slice(0,1);
+      let actionObject = {
+        dropStack: dropResult.stack,
+        dropIndex: dropResult.dropIndex,
+        dropParentSuite: dropResult.parentSuite,
+        cardsArray: cardsArray,
+        sourceStack: props.stack,
+        sourceStackIndex: props.stackKey,
+        sourceParentSuite: props.parentSuite
+      }
+      props.actions.moveCard(actionObject);
       if(props.stack == STACKS.PLAY)
         props.actions.openCardFace(props.stackKey);
     }
 	},
   canDrag(props,monitor) {
+    if(props.stack == STACKS.DRAW){
+      return props.isLastCard;
+    }
     return props.suite != SUITE.NONE;
   }
 };
@@ -56,12 +65,19 @@ const dropSpec = {
       if(SUITE_COLOR[item.dragSuite] != SUITE_COLOR[currentCard.suite] &&
       CARD_VALUES[currentCard.value] - CARD_VALUES[item.dragValue] == 1)
         return true;
+
+      if(props.emptyStack && currentCard.value == CARD_VALUES.KING)
+        return true;
     }
 
     if(props.stack == STACKS.SUITE){
-      if(item.dragSuite == props.suite &&
-      CARD_VALUES[item.dragValue] - CARD_VALUES[props.value] == 1)
-        return true;
+      if(item.dragSuite == props.parentSuite){
+        if(props.cardsToRender.length == 0 && CARD_VALUES[item.dragValue] == CARD_VALUES.ACE)
+          return true;
+        let topCard = props.cardsToRender.length >0 ? props.cardsToRender[0] : {};
+        if(CARD_VALUES[item.dragValue] - CARD_VALUES[topCard.value] == 1)
+          return true;
+      }
     }
 
     return false;
@@ -87,6 +103,8 @@ class CardWrapper extends Component {
   let cardWrapperClass = "cardWrapper";
   if(this.props.stack == STACKS.PLAY)
     cardWrapperClass = `${cardWrapperClass} playStack`;
+  else if(this.props.stack == STACKS.DRAW)
+    cardWrapperClass = `${cardWrapperClass} drawActive`;
   return connectDragSource(connectDropTarget(<div className={cardWrapperClass}>
             <Card {...this.props}/>
           </div>));

@@ -44,6 +44,9 @@ const Card = (props) => {
         value = currentCard.value;
         suite = currentCard.suite;
         nextCards = props.cardsToRender.slice(1,);
+      } else {
+        value = "suite";
+        suite = props.parentSuite;
       }
     } else if(props.suite && props.value){
       suite = props.suite;

@@ -57,4 +57,4 @@ typings/
 # dotenv environment variables file
 .env
 
-src/client/public/
+src/client/dist/

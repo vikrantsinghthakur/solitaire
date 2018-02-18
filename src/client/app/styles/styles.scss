@@ -1,0 +1,56 @@
+@import "variables";
+
+body{
+  background-color: green;
+  overflow: hidden;
+  margin-left: 4vw;
+  margin-right: 4vw;
+  margin-top: 1vw;
+}
+.stack {
+  display: inline-block;
+  &.suite {
+    display: inline-block;
+    float: right;
+  }
+  &.draw {
+    display: inline-block;
+    & > div.cardWrapper {
+      &:nth-child(n + 4) { left: -4vw; }
+      &:nth-child(n + 5) { left: -8vw; }
+    }
+  }
+  &.play{
+    display: flex;
+    width: 100%;
+    max-height: 290px;
+    justify-content: space-between;
+  }
+}
+
+.cardWrapper {
+  position: relative;
+  display: inline-block;
+  &.playStack {
+    top: -95px;
+  }
+  &.suiteStack {
+    top: -150px;
+  }
+}
+
+.separator{
+  display: inline-block;
+  &.vertical{
+    width: $suite_separator_width;
+  }
+}
+
+.suiteSpace{
+  height: 150px;
+}
+
+.playAreaSeparator{
+  height: $play_area_separator_height;
+  max-height: $play_area_separator_height;
+}

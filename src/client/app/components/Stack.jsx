@@ -7,12 +7,20 @@ import { STACKS,DIFFICULTY,SUITE } from '../utils/constants';
    let auxRender = null, separator=null, stackClass="stack";
    let primaryRender = () => null
    if(props.stack == STACKS.DRAW){
-     stackClass = `${stackClass} draw`
-     auxRender = (<CardWrapper value="card" suite="down" suite={SUITE.NONE}
-       cardDrawer={true} {...props}/>);
-     separator = <Separator/>
+
+     stackClass = `${stackClass} draw`;
+
+     let nonEmptyPassiveArray = props.passiveStack && props.passiveStack.length > 0;
+     let auxRenderValue = nonEmptyPassiveArray ? "card" : "empty";
+     let auxRenderSuite = nonEmptyPassiveArray ? "down" : "none";
+     auxRender = (<CardWrapper renderValue={auxRenderValue} renderSuite={auxRenderSuite}
+       suite={SUITE.NONE} cardDrawer={true} {...props}/>);
+
+     separator = <Separator type="vertical"/>
+
      if(props.activeStack && props.activeStack.length > 0){
-       let activeDrawCount = props.difficulty == DIFFICULTY.HARD ? 3: 1;
+       //let activeDrawCount = props.difficulty == DIFFICULTY.HARD ? 3: 1;
+       let activeDrawCount = props.activeDrawCount;
        let cardsToRender = props.activeStack.slice(-activeDrawCount,),
        length = cardsToRender.length, counter = 1;
        primaryRender = () => cardsToRender.map((card) => {
@@ -26,21 +34,29 @@ import { STACKS,DIFFICULTY,SUITE } from '../utils/constants';
             cardsToRender={[card]} {...props} isLastCard={isLastCard} key={counter++} />})
      }
    } else if(props.stack == STACKS.SUITE && props.suiteStackProps){
+     auxRender = <div className='suiteSpace'/>
+     separator = null;
      stackClass = `${stackClass} suite`
+
      let primaryRenderArray = [];
      let cardsToRender = null;
      let counter = 0;
+
      for(let key in props.suiteStackProps){
        if(props.suiteStackProps.hasOwnProperty(key)){
          cardsToRender = props.suiteStackProps[key];
+         let singleCard = [];
+         if(cardsToRender && cardsToRender.length > 0)
+            singleCard = [cardsToRender.pop()];
          primaryRenderArray.push(<CardWrapper parentSuite={key}
-           cardsToRender={cardsToRender} {...props} key={counter++}/>)
-         primaryRenderArray.push(<Separator key={counter++}/>)
+           cardsToRender={singleCard} {...props} key={counter++}/>)
+         primaryRenderArray.push(<Separator type='vertical' key={counter++}/>)
        }
      }
      primaryRender = () => primaryRenderArray.map(element => element)
    } else if(props.stack == STACKS.PLAY){
      stackClass = `${stackClass} play`
+
      let primaryRenderArray = [];
      let cardsToRender = null;
      let counter = 1;
@@ -56,6 +72,7 @@ import { STACKS,DIFFICULTY,SUITE } from '../utils/constants';
             emptyStack={emptyStack} cardsToRender={cardsToRender} {...props}/>)
        }
      }
+
      primaryRender = () => primaryRenderArray.map(element => element);
    }
    return <div className={stackClass}>

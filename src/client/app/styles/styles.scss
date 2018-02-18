@@ -2,6 +2,9 @@
 
 body{
   background-color: green;
+  overflow: hidden;
+  margin-left: 4vw;
+  margin-right: 4vw;
 }
 .stack {
   display: inline-block;
@@ -11,10 +14,15 @@ body{
   }
   &.draw {
     display: inline-block;
+    & > div.cardWrapper {
+      &:nth-child(n + 4) { left: -4vw; }
+      &:nth-child(n + 5) { left: -8vw; }
+    }
   }
   &.play{
     display: flex;
     width: 100%;
+    max-height: 290px;
     justify-content: space-between;
   }
 }
@@ -23,13 +31,22 @@ body{
   position: relative;
   display: inline-block;
   &.playStack {
-    top: -125px;
+    top: -95px;
+  }
+  &.suiteStack {
+    top: -150px;
   }
 }
 
 .separator{
   display: inline-block;
-  width: $suite_separator_width;
+  &.vertical{
+    width: $suite_separator_width;
+  }
+}
+
+.suiteSpace{
+  height: 150px;
 }
 
 .playAreaSeparator{

@@ -24,8 +24,11 @@ export const generateState = () => {
     let cardArray = Object.keys(CARD_VALUES);
 
     let fullDeck = _.product(suiteArray,cardArray);
-    fullDeck = shuffleArray(fullDeck.map((item) => {return {suite:item[0],
-                                        value:item[1]}}));
+    // fullDeck = shuffleArray(fullDeck.map((item) => {return {suite:item[0],
+    //                                     value:item[1]}}));
+
+    fullDeck = fullDeck.map((item) => {return {suite:item[0],
+                                        value:item[1]}});
 
     for(let i of _.range(1,8)){
       state[STACKS.PLAY][i]=[];
@@ -49,6 +52,9 @@ export const generateState = () => {
 
     ////
     state.difficulty = DIFFICULTY.HARD;
+    state.activeDrawCount = 3;
     ////
+
+    state.closedCards = 21;
     return state;
 }

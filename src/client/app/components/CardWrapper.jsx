@@ -9,11 +9,14 @@ import { STACKS,SUITE_COLOR,SUITE,CARD_VALUES } from '../utils/constants';
 const types = "Card";
 const dragSpec = {
   beginDrag(props, monitor, component){
-    console.log("CARDPROPS")
-    console.log(props);
+    let dragValue, dragSuite;
+    if(props.cardsToRender && props.cardsToRender.length > 0){
+      dragValue = props.cardsToRender[0].value;
+      dragSuite = props.cardsToRender[0].suite;
+    }
     return {
-      dragValue: props.cardsToRender[0].value,
-      dragSuite: props.cardsToRender[0].suite
+      dragValue,
+      dragSuite
     };
   },
   endDrag(props, monitor) {
@@ -35,6 +38,8 @@ const dragSpec = {
       props.actions.moveCard(actionObject);
       if(props.stack == STACKS.PLAY)
         props.actions.openCardFace(props.stackKey);
+      if(props.stack == STACKS.DRAW)
+        props.actions.reduceActiveDrawCount();
     }
 	},
   canDrag(props,monitor) {
@@ -57,10 +62,11 @@ const dropSpec = {
     if(monitor.didDrop())
       return false;
 
-    if(props.cardsToRender && props.cardsToRender.length>1)
+    let cardsArray = props.cardsToRender;
+    if(cardsArray && cardsArray.length>1)
       return false;
 
-    const currentCard = props.cardsToRender ? props.cardsToRender[0] : {};
+    const currentCard = cardsArray && cardsArray.length > 0 ? cardsArray[0] : {};
     if(props.stack == STACKS.PLAY){
       if(SUITE_COLOR[item.dragSuite] != SUITE_COLOR[currentCard.suite] &&
       CARD_VALUES[currentCard.value] - CARD_VALUES[item.dragValue] == 1)
@@ -72,9 +78,9 @@ const dropSpec = {
 
     if(props.stack == STACKS.SUITE){
       if(item.dragSuite == props.parentSuite){
-        if(props.cardsToRender.length == 0 && CARD_VALUES[item.dragValue] == CARD_VALUES.ACE)
+        if(cardsArray.length == 0 && CARD_VALUES[item.dragValue] == CARD_VALUES.ACE)
           return true;
-        let topCard = props.cardsToRender.length >0 ? props.cardsToRender[0] : {};
+        let topCard = cardsArray.length >0 ? cardsArray[0] : {};
         if(CARD_VALUES[item.dragValue] - CARD_VALUES[topCard.value] == 1)
           return true;
       }
@@ -103,8 +109,8 @@ class CardWrapper extends Component {
   let cardWrapperClass = "cardWrapper";
   if(this.props.stack == STACKS.PLAY)
     cardWrapperClass = `${cardWrapperClass} playStack`;
-  else if(this.props.stack == STACKS.DRAW)
-    cardWrapperClass = `${cardWrapperClass} drawActive`;
+  else if(this.props.stack == STACKS.SUITE)
+    cardWrapperClass = `${cardWrapperClass} suiteStack`;
   return connectDragSource(connectDropTarget(<div className={cardWrapperClass}>
             <Card {...this.props}/>
           </div>));

@@ -29,7 +29,7 @@ class Game extends Component{
     <div>
       <div>
         <Stack stack={STACKS.DRAW} {...drawStackProps}
-            difficulty={this.props.difficulty}/>
+            difficulty={this.props.difficulty} activeDrawCount={this.props.activeDrawCount}/>
         <Stack stack={STACKS.SUITE} suiteStackProps={suiteStackProps}/>
       </div>
       <div className="playAreaSeparator" />
@@ -44,7 +44,8 @@ const mapStateToProps = (state) => {
     drawStack: state.get(STACKS.DRAW),
     suiteStack: state.get(STACKS.SUITE),
     playStack: state.get(STACKS.PLAY),
-    difficulty: state.get('difficulty')
+    difficulty: state.get('difficulty'),
+    activeDrawCount: state.get('activeDrawCount')
   }
 }
 

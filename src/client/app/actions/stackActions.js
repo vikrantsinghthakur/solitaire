@@ -26,6 +26,12 @@ export const moveCard = (actionObject) => {
   }
 }
 
+export const reduceActiveDrawCount = () => {
+  return {
+    type: Constants.REDUCE_ACTIVE_DRAW_COUNT
+  }
+}
+
 export const moveToSuiteStack = (dropStack, dropIndex, parentSuite, card, sourceStack, sourceStackIndex) => {
   return{
     type: Constants.MOVE_TO_SUITE_STACK,

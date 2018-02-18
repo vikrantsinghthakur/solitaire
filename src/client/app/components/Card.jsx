@@ -23,8 +23,8 @@ const Card = (props) => {
           suite = currentCard.suite;
         }
       } else {
-        value = "card";
-        suite = "down";
+        value = "empty";
+        suite = "none";
       }
     } else if(props.stack == STACKS.DRAW && props.difficulty == DIFFICULTY.HARD) {
       console.log(props.cardDrawer);
@@ -34,8 +34,8 @@ const Card = (props) => {
         suite = currentCard.suite;
         nextCards = props.cardsToRender.slice(1,);
       } else if(props.cardDrawer){
-        value = "card";
-        suite = "down";
+        value = props.renderValue;
+        suite = props.renderSuite;
         onClickFunction = props.actions.drawCard;
       }
     } else if(props.stack == STACKS.SUITE){
@@ -54,7 +54,7 @@ const Card = (props) => {
     }
 
 
-    return (<div onClick={onClickFunction} style={{"display":"inline-block", "maxWidth" : "100px"}}>
+    return (<div onClick={onClickFunction} style={{"display":"inline-block", "width" : "8vw", "maxWidth": "75px"}}>
               <img style={{"maxWidth" : "100%"}}
                 src={`../assets/${value}_of_${suite}.png`}/>
               {nextCards && nextCards.length> 0 ? <CardWrapper {...props}

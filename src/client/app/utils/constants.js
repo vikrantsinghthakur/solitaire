@@ -60,6 +60,7 @@ export const MOVE_TO_SUITE_STACK = "moveToSuiteStack";
 export const OPEN_CARD_FACE = "openCardFace";
 export const DRAW_CARD = "drawCard";
 export const MOVE_CARD = "moveCard";
+export const REDUCE_ACTIVE_DRAW_COUNT = "reduceActiveDrawCount";
 
 /*CSS Constants*/
 export const SUITE_SEPARATOR_WIDTH = "1vw";

@@ -26,7 +26,7 @@ const Card = (props) => {
         value = "empty";
         suite = "none";
       }
-    } else if(props.stack == STACKS.DRAW && props.difficulty == DIFFICULTY.HARD) {
+    } else if(props.stack == STACKS.DRAW) {
       console.log(props.cardDrawer);
       if(props.cardsToRender && props.cardsToRender.length > 0){
         currentCard = props.cardsToRender[0];

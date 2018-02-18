@@ -1,15 +1,16 @@
 import * as Constants from '../utils/constants';
 import {checkUndefined} from '../utils/helper';
 
-export const actionThrower = () =>
-{return {
-  type: 'actionThrower',
-  value: '99'
-}}
-
 export const newGame = () => {
   return{
     type: Constants.NEW_GAME
+  }
+}
+
+export const setDifficulty = (difficulty) => {
+  return{
+    type: Constants.SET_DIFFICULTY,
+    difficulty
   }
 }
 
@@ -29,27 +30,6 @@ export const moveCard = (actionObject) => {
 export const reduceActiveDrawCount = () => {
   return {
     type: Constants.REDUCE_ACTIVE_DRAW_COUNT
-  }
-}
-
-export const moveToSuiteStack = (dropStack, dropIndex, parentSuite, card, sourceStack, sourceStackIndex) => {
-  return{
-    type: Constants.MOVE_TO_SUITE_STACK,
-    dropStack,
-    parentSuite,
-    card,
-    sourceStack
-  }
-}
-
-export const moveToPlayStack = (dropStack, dropIndex, parentSuite, cardsArray, sourceStack, sourceStackIndex) => {
-  return{
-    type: Constants.MOVE_TO_PLAY_STACK,
-    dropStack,
-    dropIndex,
-    cardsArray,
-    sourceStack,
-    sourceStackIndex
   }
 }
 

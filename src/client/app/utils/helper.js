@@ -1,4 +1,9 @@
-import {CARD_SUITE,CARD_VALUES,CARD_FACE,DIFFICULTY,STACKS} from './constants'
+import {CARD_SUITE,
+        CARD_VALUES,
+        CARD_FACE,
+        DIFFICULTY,
+        STACKS,
+        GAME_STATE} from './constants'
 import _ from 'lodash';
 import 'lodash.product';
 
@@ -51,10 +56,13 @@ export const generateState = () => {
     }
 
     ////
-    state.difficulty = DIFFICULTY.HARD;
+    //state.difficulty = DIFFICULTY.HARD;
     state.activeDrawCount = 3;
     ////
 
     state.closedCards = 21;
+
+    state.gameState = GAME_STATE.NEW;
+
     return state;
 }

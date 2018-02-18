@@ -24,6 +24,7 @@
     "write-file-webpack-plugin": "^4.2.0"
   },
   "dependencies": {
+    "bootstrap": "4.0.0-alpha.6",
     "immutable": "^3.8.2",
     "lodash": "^4.17.4",
     "lodash.product": "^18.1.16",
@@ -33,6 +34,7 @@
     "react-dnd-touch-backend": "^0.3.20",
     "react-dom": "^16.2.0",
     "react-redux": "^5.0.6",
+    "reactstrap": "^5.0.0-beta",
     "redux": "^3.7.2"
   }
 }

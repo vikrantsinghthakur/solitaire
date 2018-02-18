@@ -4,18 +4,35 @@ import CardWrapper from './CardWrapper';
 import Box from './Box';
 import Separator from './Separator';
 import Stack from './Stack';
+import CustomModal from './CustomModal';
 import * as actions from '../actions/stackActions';
 import * as Constants from '../utils/constants'
 import {bindActionCreators} from 'redux';
 import {connect} from 'react-redux';
 import {generateState} from '../utils/helper';
-import {STACKS,SUITE} from '../utils/constants';
+import {STACKS,SUITE,GAME_STATE} from '../utils/constants';
 
 
 class Game extends Component{
-  componentDidMount(){
+  constructor(props){
+    super(props);
+    this.displayModal = null;
+  }
+
+  componentWillMount(){
     this.props.actions.newGame();
   }
+
+  componendDidMount(){
+    this.displayModal = <CustomModal actions={this.props.actions}
+        gameState={this.props.gameState}/>;
+  }
+
+  componentWillUpdate(nextProps,nextState){
+      this.displayModal = <CustomModal actions={this.props.actions}
+        gameState={nextProps.gameState}/>
+  }
+
   render(){
     console.log(`PROPS = ${JSON.stringify(this.props)}`);
     let drawStackProps = null,suiteStackProps = null,playStackProps=null;
@@ -27,6 +44,7 @@ class Game extends Component{
       playStackProps = this.props.playStack.toJS();
     return (
     <div>
+      {this.displayModal}
       <div>
         <Stack stack={STACKS.DRAW} {...drawStackProps}
             difficulty={this.props.difficulty} activeDrawCount={this.props.activeDrawCount}/>
@@ -45,7 +63,8 @@ const mapStateToProps = (state) => {
     suiteStack: state.get(STACKS.SUITE),
     playStack: state.get(STACKS.PLAY),
     difficulty: state.get('difficulty'),
-    activeDrawCount: state.get('activeDrawCount')
+    activeDrawCount: state.get('activeDrawCount'),
+    gameState: state.get('gameState')
   }
 }
 

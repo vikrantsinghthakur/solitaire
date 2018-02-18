@@ -1,7 +1,7 @@
 import * as Constants from '../utils/constants';
 import {fromJS, set} from 'immutable';
 import {generateState} from '../utils/helper';
-import {STACKS, CARD_FACE, DIFFICULTY} from '../utils/constants';
+import {STACKS, CARD_FACE, DIFFICULTY, GAME_STATE} from '../utils/constants';
 import {isArray} from 'lodash';
 
 const reduceActiveDrawCount = (state,value) => {
@@ -39,11 +39,18 @@ const openCardFace = (state, action) => {
   card = stackElements.pop();
   if(!card)
     return initialState;
+  if(card.face == CARD_FACE.CLOSED){
+    closedCards = initialState.get('closedCards');
+    closedCards--;
+    initialState = initialState.set('closedCards', closedCards);
+  }
+  
   card.face = CARD_FACE.OPEN;
   stackElements.push(card);
-  closedCards = initialState.get('closedCards');
-  closedCards--;
-  initialState = initialState.set('closedCards', closedCards);
+
+  if(closedCards == 0){
+    initialState = initialState.set('gameState',GAME_STATE.COMPLETE);
+  }
   return initialState.setIn([stack, action.playStackIndex.toString()], fromJS(stackElements));
 }
 
@@ -81,6 +88,14 @@ const moveCard = (state,action) => {
   return newState;
 }
 
+const setDifficulty = (state,action) => {
+  let newState = state;
+  const drawCount = action.difficulty == DIFFICULTY.HARD ? 3 : 1;
+  newState = newState.set('activeDrawCount', drawCount);
+  newState = newState.set('gameState', GAME_STATE.OPEN);
+  return newState.set('difficulty', action.difficulty);
+}
+
 const stackReducer = (state, action) => {
   switch (action.type) {
     case Constants.NEW_GAME:
@@ -97,6 +112,9 @@ const stackReducer = (state, action) => {
       break;
     case Constants.REDUCE_ACTIVE_DRAW_COUNT:
       return reduceActiveDrawCount(state,action);
+      break;
+    case Constants.SET_DIFFICULTY:
+      return setDifficulty(state,action);
       break;
     default:
       return state;

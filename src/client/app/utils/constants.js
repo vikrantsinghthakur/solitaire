@@ -53,6 +53,12 @@ export const DIFFICULTY = {
   HARD: 'HARD'
 }
 
+export const GAME_STATE = {
+  NEW: 'NEW',
+  OPEN: 'OPEN',
+  COMPLETE: 'COMPLETE'
+}
+
 /*Action Constants*/
 export const NEW_GAME = "newGame";
 export const MOVE_TO_PLAY_STACK = "moveToPlayStack";
@@ -61,6 +67,7 @@ export const OPEN_CARD_FACE = "openCardFace";
 export const DRAW_CARD = "drawCard";
 export const MOVE_CARD = "moveCard";
 export const REDUCE_ACTIVE_DRAW_COUNT = "reduceActiveDrawCount";
+export const SET_DIFFICULTY = "setDifficulty";
 
 /*CSS Constants*/
 export const SUITE_SEPARATOR_WIDTH = "1vw";

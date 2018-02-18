@@ -72,7 +72,7 @@ const dropSpec = {
       CARD_VALUES[currentCard.value] - CARD_VALUES[item.dragValue] == 1)
         return true;
 
-      if(props.emptyStack && currentCard.value == CARD_VALUES.KING)
+      if(props.emptyStack && CARD_VALUES[item.dragValue] == CARD_VALUES.KING)
         return true;
     }
 

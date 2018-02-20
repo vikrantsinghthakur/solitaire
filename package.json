@@ -6,7 +6,8 @@
   "author": "vikrant <thakur.vikrantsingh6000@gmail.com>",
   "license": "MIT",
   "scripts": {
-    "start:dev": "webpack && webpack-dev-server --color --watch"
+    "start:dev": "webpack && webpack-dev-server --color --watch",
+    "start:server": "node src/server/server.js"
   },
   "devDependencies": {
     "babel-core": "^6.26.0",
@@ -24,7 +25,9 @@
     "write-file-webpack-plugin": "^4.2.0"
   },
   "dependencies": {
+    "body-parser": "^1.18.2",
     "bootstrap": "4.0.0-alpha.6",
+    "express": "^4.16.2",
     "immutable": "^3.8.2",
     "lodash": "^4.17.4",
     "lodash.product": "^18.1.16",

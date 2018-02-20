@@ -1,6 +1,6 @@
 # Solitaire
 This is solitaire game built using React, a product of my boredom coupled with free time.
-Standard solitaire rules apply, click the deck on top left corner to draw cards. No scorekeeping, just whether you win or don't. Additionally, no undo button for wrong moves; life doesn't give you one anyway.
+Standard solitaire rules apply, click the deck on top left corner to draw cards. No scorekeeping, just whether you win or don't. Additionally, no undo button for wrong moves; life doesn't give you one either.
 
 # Dev notes
 Redux is employed here to maintain state of the app and update it based on events.  

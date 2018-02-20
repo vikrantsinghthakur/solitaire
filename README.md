@@ -1,6 +1,6 @@
 # Solitaire
 This is solitaire game built using React, a product of my boredom coupled with free time.
-We are not keeping scores here, just whether you win or don't. Additionally, no undo button for wrong moves, life doesn't give you one either.
+Standard solitaire rules apply, click the deck on top left corner to draw cards. No scorekeeping, just whether you win or don't. Additionally, no undo button for wrong moves; life doesn't give you one either.
 
 # Dev notes
 Redux is employed here to maintain state of the app and update it based on events.  
@@ -11,5 +11,5 @@ initialSetup branch has initial setup of react with Webpack. advancedSetup branc
 These can be used as boilerplate for future projects.
 
 # Reachout
-[Facebook](https://www.facebook.com/vikrantsingh.thakur.14) 
+[Facebook](https://www.facebook.com/vikrantsingh.thakur.14)
 [LinkedIn](https://www.linkedin.com/in/vikrantsingh-thakur-7b855285/)

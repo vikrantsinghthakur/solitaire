@@ -1,11 +1,11 @@
 @import "variables";
 
 body{
-  background-color: green;
+  background-color: $body_color;
   overflow: hidden;
-  margin-left: 4vw;
-  margin-right: 4vw;
-  margin-top: 1vw;
+  margin-left: $body_horizontal_margin;
+  margin-right: $body_horizontal_margin;
+  margin-top: $body_vertical_margin;
 }
 .stack {
   display: inline-block;
@@ -16,14 +16,14 @@ body{
   &.draw {
     display: inline-block;
     & > div.cardWrapper {
-      &:nth-child(n + 4) { left: -4vw; }
-      &:nth-child(n + 5) { left: -8vw; }
+      &:nth-child(n + 4) { left: $active_draw_margin; }
+      &:nth-child(n + 5) { left: 2*$active_draw_margin; }
     }
   }
   &.play{
     display: flex;
-    width: 100%;
-    max-height: 290px;
+    width: $hundred_percent;
+    max-height: $play_stack_max_height;
     justify-content: space-between;
   }
 }
@@ -32,10 +32,10 @@ body{
   position: relative;
   display: inline-block;
   &.playStack {
-    top: -95px;
+    top: $play_stack_margin;
   }
   &.suiteStack {
-    top: -150px;
+    top: $suite_stack_margin;
   }
 }
 
@@ -47,7 +47,16 @@ body{
 }
 
 .suiteSpace{
-  height: 150px;
+  height: $suite_space_height;
+}
+
+.cardClass{
+  display: inline-block;
+  width: $card_width;
+  max-width: $card_max_width;
+  & .cardImage{
+    max-width: $hundred_percent;
+  }
 }
 
 .playAreaSeparator{

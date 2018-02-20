@@ -6,8 +6,9 @@
   "author": "vikrant <thakur.vikrantsingh6000@gmail.com>",
   "license": "MIT",
   "scripts": {
-    "start:dev": "webpack && webpack-dev-server --color --watch",
-    "start:server": "node src/server/server.js"
+    "start:dev": "webpack-dev-server --open --config webpack.dev.js",
+    "start:server": "node src/server/server.js",
+    "build": "webpack --config webpack.prod.js"
   },
   "devDependencies": {
     "babel-core": "^6.26.0",
@@ -20,8 +21,10 @@
     "node-sass": "^4.7.2",
     "sass-loader": "^6.0.6",
     "style-loader": "^0.19.1",
+    "uglifyjs-webpack-plugin": "^1.2.0",
     "webpack": "^3.10.0",
     "webpack-dev-server": "^2.9.7",
+    "webpack-merge": "^4.1.1",
     "write-file-webpack-plugin": "^4.2.0"
   },
   "dependencies": {

@@ -2,8 +2,6 @@ var webpack = require('webpack');
 var path = require('path');
 var CopyWebpackPlugin = require('copy-webpack-plugin');
 var WriteFileWebpackPlugin = require('write-file-webpack-plugin');
-var webpack = require('webpack');
-
 
 var BUILD_DIR = path.resolve(path.join(__dirname, '/dist'));
 var APP_DIR = path.resolve(__dirname, 'src/client/app');
@@ -34,21 +32,9 @@ var config = {
   resolve : {
     extensions: ['*', '.js', '.jsx']
   },
-  devtool: 'source-map',
-  devServer: {
-    contentBase: BUILD_DIR,
-    compress: true,
-    port: 9000,
-    hot: true
-  },
-  plugins : [
-    new WriteFileWebpackPlugin({
-          test: /^(?!.*(hot)).*/,
-    }),
-    new CopyWebpackPlugin([{from: 'src/client/index.html'},{from:'src/client/app/assets', to:'./assets'}]),
-    new webpack.NamedModulesPlugin(),
-    new webpack.HotModuleReplacementPlugin()
+  plugins: [
+      new CopyWebpackPlugin([{from: 'src/client/index.html'},{from:'src/client/app/assets', to:'./assets'}])
   ]
-};
+}
 
 module.exports = config;

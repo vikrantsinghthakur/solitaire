@@ -1,5 +1,15 @@
-# solitaire
-This is solitaire game that works on React and Redux.
+# Solitaire
+This is solitaire game built using React, a product of my boredom coupled with free time.
+We are not keeping scores here, just whether you win or don't. Additionally, no undo button for wrong moves, life doesn't give you one either.
 
-master branch has initial setup of react with Webpack
-advancedSetup branch has additional setup which includes redux and webpack-dev-server
+# Dev notes
+Redux is employed here to maintain state of the app and update it based on events.  
+For drag and drop support, react-dnd is doing the lifting augmented by touch-backend. Touch-backend was preferred over HTML5 due to touch support, at the expense of additional configuration.
+
+### Footnote for future self
+initialSetup branch has initial setup of react with Webpack. advancedSetup branch has additional setup which includes redux and webpack-dev-server with HMR.  
+These can be used as boilerplate for future projects.
+
+# Reachout
+[Facebook](https://www.facebook.com/vikrantsingh.thakur.14) 
+[LinkedIn](https://www.linkedin.com/in/vikrantsingh-thakur-7b855285/)

@@ -54,8 +54,8 @@ const Card = (props) => {
     }
 
 
-    return (<div onClick={onClickFunction} style={{"display":"inline-block", "width" : "8vw", "maxWidth": "75px"}}>
-              <img style={{"maxWidth" : "100%"}}
+    return (<div onClick={onClickFunction} className="cardClass">
+              <img className="cardImage"
                 src={`../assets/${value}_of_${suite}.png`}/>
               {nextCards && nextCards.length> 0 ? <CardWrapper {...props}
                 cardsToRender={nextCards} /> : null}

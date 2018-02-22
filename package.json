@@ -7,8 +7,9 @@
   "license": "MIT",
   "scripts": {
     "start:dev": "webpack-dev-server --open --config webpack.dev.js",
-    "start:server": "node src/server/server.js",
-    "build": "webpack --config webpack.prod.js"
+    "start": "node src/server/server.js",
+    "build": "webpack --config webpack.prod.js",
+    "postinstall": "webpack --config webpack.prod.js"
   },
   "devDependencies": {
     "babel-core": "^6.26.0",

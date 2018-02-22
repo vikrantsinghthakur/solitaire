@@ -53,10 +53,10 @@ const Card = (props) => {
       value = props.value;
     }
 
-
+    const imageSource = `../assets/${value.toLowerCase()}_of_${suite.toLowerCase()}.png`;
     return (<div onClick={onClickFunction} className="cardClass">
               <img className="cardImage"
-                src={`../assets/${value}_of_${suite}.png`}/>
+                src={imageSource}/>
               {nextCards && nextCards.length> 0 ? <CardWrapper {...props}
                 cardsToRender={nextCards} /> : null}
            </div>);

@@ -5,7 +5,6 @@ import {CARD_SUITE,
         STACKS,
         GAME_STATE} from './constants'
 import _ from 'lodash';
-import 'lodash.product';
 
 const shuffleArray = (array) => {
     for (var i = array.length - 1; i > 0; i--) {
@@ -29,8 +28,8 @@ export const generateState = () => {
     let cardArray = Object.keys(CARD_VALUES);
 
     let fullDeck = _.product(suiteArray,cardArray);
-    // fullDeck = shuffleArray(fullDeck.map((item) => {return {suite:item[0],
-    //                                     value:item[1]}}));
+    fullDeck = shuffleArray(fullDeck.map((item) => {return {suite:item[0],
+                                        value:item[1]}}));
 
     fullDeck = fullDeck.map((item) => {return {suite:item[0],
                                         value:item[1]}});
@@ -55,10 +54,7 @@ export const generateState = () => {
       "SPADES":[]
     }
 
-    ////
-    //state.difficulty = DIFFICULTY.HARD;
     state.activeDrawCount = 3;
-    ////
 
     state.closedCards = 21;
 

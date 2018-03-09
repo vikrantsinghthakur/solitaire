@@ -5,6 +5,7 @@ import {CARD_SUITE,
         STACKS,
         GAME_STATE} from './constants'
 import _ from 'lodash';
+import 'lodash.product';
 
 const shuffleArray = (array) => {
     for (var i = array.length - 1; i > 0; i--) {
@@ -30,9 +31,6 @@ export const generateState = () => {
     let fullDeck = _.product(suiteArray,cardArray);
     fullDeck = shuffleArray(fullDeck.map((item) => {return {suite:item[0],
                                         value:item[1]}}));
-
-    fullDeck = fullDeck.map((item) => {return {suite:item[0],
-                                        value:item[1]}});
 
     for(let i of _.range(1,8)){
       state[STACKS.PLAY][i]=[];

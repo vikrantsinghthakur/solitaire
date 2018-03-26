@@ -10,6 +10,9 @@ For drag and drop support, react-dnd is doing the lifting augmented by touch-bac
 initialSetup branch has initial setup of react with Webpack. advancedSetup branch has additional setup which includes redux and webpack-dev-server with HMR.  
 These can be used as boilerplate for future projects.
 
+# Known issues
+Image fetching for cards is too slow. This causes laggy rendering of cards. Hosting on a separate CDN is required. Since this project is cost sensitive, there is a need to analyse potential options.
+
 # Reachout
 [Facebook](https://www.facebook.com/vikrantsingh.thakur.14)
 [LinkedIn](https://www.linkedin.com/in/vikrantsingh-thakur-7b855285/)

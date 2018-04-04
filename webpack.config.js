@@ -4,7 +4,6 @@ var CopyWebpackPlugin = require('copy-webpack-plugin');
 var WriteFileWebpackPlugin = require('write-file-webpack-plugin');
 var webpack = require('webpack');
 
-
 var BUILD_DIR = path.resolve(path.join(__dirname, '/dist'));
 var APP_DIR = path.resolve(__dirname, 'src/client/app');
 

@@ -73,3 +73,6 @@ export const SET_DIFFICULTY = "setDifficulty";
 export const SUITE_SEPARATOR_WIDTH = "1vw";
 export const STACK_SEPARATOR_WIDTH = "6.5vw";
 export const PLAY_AREA_SEPARATOR = "5vw";
+
+/*Bucket Url*/
+export const URL = "https://s3-ap-southeast-1.amazonaws.com/webappikrant/reactsolitaire";

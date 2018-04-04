@@ -8,7 +8,8 @@ const Card = (props) => {
     cards = null,
     nextCards = null,
     value = null,
-    suite = null;
+    suite = null,
+    onClickFunction= () => {}
 
     if(props.stack == STACKS.PLAY && props.suite != SUITE.NONE){
       if(props.cardsToRender && props.cardsToRender.length > 0){
@@ -35,6 +36,7 @@ const Card = (props) => {
       } else if(props.cardDrawer){
         value = props.renderValue;
         suite = props.renderSuite;
+        onClickFunction = props.actions.drawCard;
       }
     } else if(props.stack == STACKS.SUITE){
       if(props.cardsToRender && props.cardsToRender.length > 0){
@@ -52,7 +54,7 @@ const Card = (props) => {
     }
 
     const imageSource = `${URL}/${value.toLowerCase()}_of_${suite.toLowerCase()}.png`;
-    return (<div className="cardClass">
+    return (<div onClick={onClickFunction} className="cardClass">
               <img className="cardImage"
                 src={imageSource}/>
               {nextCards && nextCards.length> 0 ? <CardWrapper {...props}

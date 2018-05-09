@@ -11,7 +11,8 @@ initialSetup branch has initial setup of react with Webpack. advancedSetup branc
 These can be used as boilerplate for future projects.
 
 # Known issues
-[SOLVED]~~Image fetching for cards is too slow. This causes laggy rendering of cards. Hosting on a separate CDN is required. Since this project is cost sensitive, there is a need to analyse potential options.~~
+Image fetching for cards is too slow. This causes laggy rendering of cards. ~~Hosting on a separate CDN is required. Since this project is cost sensitive, there is a need to analyse potential options.~~ Hosting this small projects is not so costly after all!
+However, the image sizes still prove too large for medium to slow networks. They need to be compressed to smaller sizes(since I am anyway making them smaller in app) before being served over the wire. Also need to analyse performance after prefetching those images.
 
 # Reachout
 [Facebook](https://www.facebook.com/vikrantsingh.thakur.14)

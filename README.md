@@ -12,8 +12,8 @@ These can be used as boilerplate for future projects.
 
 # Known issues
 Image fetching for cards is too slow. This causes laggy rendering of cards. ~~Hosting on a separate CDN is required. Since this project is cost sensitive, there is a need to analyse potential options.~~ Hosting these small projects is not so costly after all!
-However, the image sizes still prove too large for medium to slow networks. They need to be compressed to smaller sizes before being served over the wire. Also need to analyse performance after prefetching those images.
-Another minor issue is the time required for first load of the app. If you are reading this and your name is not Vikrant, it is because of hosting on Heroku dyno. If there haven't been many requests to the dyno over a period of time, it goes to sleep. Any new incoming request has to wake it up first, and that wake-up time gets added to the load time. Subsequent reloads should work normally until the dyno has not served requests for a period of time and goes to sleep.
+However, the image sizes still prove too large for medium to slow networks. They need to be compressed to smaller sizes before being served over the wire. Also need to analyse performance after prefetching those images.  
+Another minor issue is the time required for first load of the app. If you are reading this and your name is not Vikrant, it is because of hosting on Heroku dyno. If there haven't been many requests to the dyno over a period of time, it goes to sleep. Any new incoming request has to wake it up first, and that wake-up time gets added to the load time. Subsequent reloads should work normally until the dyno has not served requests for a period of time and goes to sleep again.
 
 # Reachout
 [Facebook](https://www.facebook.com/vikrantsingh.thakur.14)

@@ -49,7 +49,7 @@ const dragSpec = {
     if(props.stack == STACKS.PLAY){
       if(props.cardsToRender && props.cardsToRender.length > 0) {
         let card = props.cardsToRender[0];
-        if(card.face == CARD_FACE.OPEN)
+        if(card.face != CARD_FACE.CLOSED)
           return true;
       }
       return false;

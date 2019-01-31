@@ -4,7 +4,7 @@ import {connect} from 'react-redux';
 import {bindActionCreators} from 'redux';
 import Card from './Card';
 import * as actions from '../actions/stackActions';
-import { STACKS,SUITE_COLOR,SUITE,CARD_VALUES } from '../utils/constants';
+import { STACKS,SUITE_COLOR,SUITE,CARD_VALUES,CARD_FACE } from '../utils/constants';
 
 const types = "Card";
 const dragSpec = {
@@ -45,6 +45,14 @@ const dragSpec = {
   canDrag(props,monitor) {
     if(props.stack == STACKS.DRAW){
       return props.isLastCard;
+    }
+    if(props.stack == STACKS.PLAY){
+      if(props.cardsToRender && props.cardsToRender.length > 0) {
+        let card = props.cardsToRender[0];
+        if(card.face == CARD_FACE.OPEN)
+          return true;
+      }
+      return false;
     }
     return props.suite != SUITE.NONE;
   }

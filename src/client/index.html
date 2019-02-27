@@ -3,6 +3,16 @@
   <head>
     <meta charset="utf-8">
     <title>Solitaire</title>
+    <script>
+      const url = 'https://s3-ap-southeast-1.amazonaws.com/webappikrant/reactsolitaire';
+      let suiteArray = ['hearts', 'diamonds', 'clubs', 'spades'];
+      let valueArray = ['ace', 'two', 'three', 'four', 'five', 'six', 'seven', 'eight', 'nine', 'ten', 'jack', 'queen', 'king'];
+      for(var i=0;i<suiteArray.length;i++){
+        for(var j=0;j<valueArray.length;j++){
+          document.writeln(`<link rel="preload" href="${url}/${valueArray[j]}_of_${suiteArray[i]}.png" as="image">`);
+        }
+      }
+    </script>
   </head>
   <body>
     <div id="root"/>

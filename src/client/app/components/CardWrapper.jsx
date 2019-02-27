@@ -1,10 +1,10 @@
 import React,{Component} from 'react';
-import { DragSource,DropTarget } from 'react-dnd';
+import { DragSource, DropTarget, ConnectDragPreview, ConnectDragSource } from 'react-dnd';
 import {connect} from 'react-redux';
 import {bindActionCreators} from 'redux';
 import Card from './Card';
 import * as actions from '../actions/stackActions';
-import { STACKS,SUITE_COLOR,SUITE,CARD_VALUES,CARD_FACE } from '../utils/constants';
+import { STACKS,SUITE_COLOR,SUITE,CARD_VALUES,CARD_FACE,URL } from '../utils/constants';
 
 const types = "Card";
 const dragSpec = {
@@ -60,6 +60,7 @@ const dragSpec = {
 const dragCollect = (connect, monitor) => {
   return {
     connectDragSource: connect.dragSource(),
+    connectDragPreview: connect.dragPreview(),
     isDragging: monitor.isDragging()
   };
 }
@@ -112,16 +113,18 @@ const dropCollect = (connect, monitor) => {
 }
 
 class CardWrapper extends Component {
+
   render(){
-  const {dragValue, dragSuite, connectDragSource, connectDropTarget} = this.props;
-  let cardWrapperClass = "cardWrapper";
-  if(this.props.stack == STACKS.PLAY)
-    cardWrapperClass = `${cardWrapperClass} playStack`;
-  else if(this.props.stack == STACKS.SUITE)
-    cardWrapperClass = `${cardWrapperClass} suiteStack`;
-  return connectDragSource(connectDropTarget(<div className={cardWrapperClass}>
-            <Card {...this.props}/>
-          </div>));
+    const {dragValue, dragSuite, connectDragSource, connectDropTarget, isDragging} = this.props;
+    let cardWrapperClass = "cardWrapper";
+    if(this.props.stack == STACKS.PLAY)
+      cardWrapperClass = `${cardWrapperClass} playStack`;
+    else if(this.props.stack == STACKS.SUITE)
+      cardWrapperClass = `${cardWrapperClass} suiteStack`;
+    const opacity = isDragging ? 0.4:1;
+    return connectDragSource(connectDropTarget(<div style={{opacity}} className={cardWrapperClass}>
+              <Card {...this.props}/>
+            </div>));
   }
 }
 

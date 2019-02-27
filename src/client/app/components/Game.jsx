@@ -23,7 +23,7 @@ class Game extends Component{
     this.props.actions.newGame();
   }
 
-  componendDidMount(){
+  componentDidMount(){
     this.displayModal = <CustomModal actions={this.props.actions}
         gameState={this.props.gameState}/>;
   }

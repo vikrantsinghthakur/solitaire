@@ -1,25 +1,25 @@
 /*Asset Constants*/
 export const SUITE = {
-    NONE: "NONE",
-    HEARTS: "HEARTS",
-    CLUBS: "CLUBS",
-    DIAMONDS: "DIAMONDS",
-    SPADES: "SPADES"
-}
+  NONE: "NONE",
+  HEARTS: "HEARTS",
+  CLUBS: "CLUBS",
+  DIAMONDS: "DIAMONDS",
+  SPADES: "SPADES"
+};
 
 export const CARD_SUITE = {
   HEARTS: "HEARTS",
   CLUBS: "CLUBS",
   DIAMONDS: "DIAMONDS",
   SPADES: "SPADES"
-}
+};
 
 export const SUITE_COLOR = {
   HEARTS: "RED",
   CLUBS: "BLACK",
   DIAMONDS: "RED",
   SPADES: "BLACK"
-}
+};
 
 export const CARD_VALUES = {
   ACE: 1,
@@ -35,29 +35,29 @@ export const CARD_VALUES = {
   JACK: 11,
   QUEEN: 12,
   KING: 13
-}
+};
 
 export const CARD_FACE = {
-  OPEN:'OPEN',
-  CLOSED: 'CLOSED'
-}
+  OPEN: "OPEN",
+  CLOSED: "CLOSED"
+};
 
 export const STACKS = {
-  PLAY: 'PLAY',
-  SUITE: 'SUITE',
-  DRAW: 'DRAW'
-}
+  PLAY: "PLAY",
+  SUITE: "SUITE",
+  DRAW: "DRAW"
+};
 
 export const DIFFICULTY = {
-  EASY:'EASY',
-  HARD: 'HARD'
-}
+  EASY: "EASY",
+  HARD: "HARD"
+};
 
 export const GAME_STATE = {
-  NEW: 'NEW',
-  OPEN: 'OPEN',
-  COMPLETE: 'COMPLETE'
-}
+  NEW: "NEW",
+  OPEN: "OPEN",
+  COMPLETE: "COMPLETE"
+};
 
 /*Action Constants*/
 export const NEW_GAME = "newGame";
@@ -75,4 +75,5 @@ export const STACK_SEPARATOR_WIDTH = "6.5vw";
 export const PLAY_AREA_SEPARATOR = "5vw";
 
 /*Bucket Url*/
-export const URL = "https://s3-ap-southeast-1.amazonaws.com/webappikrant/reactsolitaire";
+export const URL =
+  "https://s3-ap-southeast-1.amazonaws.com/webappikrant/reactsolitaire";

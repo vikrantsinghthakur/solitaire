@@ -1,41 +1,41 @@
-import * as Constants from '../utils/constants';
-import {checkUndefined} from '../utils/helper';
+import * as Constants from "../utils/constants";
+import { checkUndefined } from "../utils/helper";
 
 export const newGame = () => {
-  return{
+  return {
     type: Constants.NEW_GAME
-  }
-}
+  };
+};
 
-export const setDifficulty = (difficulty) => {
-  return{
+export const setDifficulty = difficulty => {
+  return {
     type: Constants.SET_DIFFICULTY,
     difficulty
-  }
-}
+  };
+};
 
 export const drawCard = () => {
-  return{
+  return {
     type: Constants.DRAW_CARD
-  }
-}
+  };
+};
 
-export const moveCard = (actionObject) => {
+export const moveCard = actionObject => {
   return {
     type: Constants.MOVE_CARD,
     ...actionObject
-  }
-}
+  };
+};
 
 export const reduceActiveDrawCount = () => {
   return {
     type: Constants.REDUCE_ACTIVE_DRAW_COUNT
-  }
-}
+  };
+};
 
-export const openCardFace = (playStackIndex) => {
-  return{
+export const openCardFace = playStackIndex => {
+  return {
     type: Constants.OPEN_CARD_FACE,
     playStackIndex
-  }
-}
+  };
+};

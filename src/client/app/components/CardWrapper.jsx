@@ -1,16 +1,30 @@
-import React,{Component} from 'react';
-import { DragSource, DropTarget, ConnectDragPreview, ConnectDragSource } from 'react-dnd';
-import {connect} from 'react-redux';
-import {bindActionCreators} from 'redux';
-import Card from './Card';
-import * as actions from '../actions/stackActions';
-import { STACKS,SUITE_COLOR,SUITE,CARD_VALUES,CARD_FACE,URL } from '../utils/constants';
+import React, { Component } from "react";
+import {
+  DragSource,
+  DropTarget,
+  ConnectDragPreview,
+  ConnectDragSource,
+  DragLayer
+} from "react-dnd";
+import { connect } from "react-redux";
+import { bindActionCreators } from "redux";
+import Card from "./Card";
+import CardDragPreview from "./CardDragPreview";
+import * as actions from "../actions/stackActions";
+import {
+  STACKS,
+  SUITE_COLOR,
+  SUITE,
+  CARD_VALUES,
+  CARD_FACE,
+  URL
+} from "../utils/constants";
 
 const types = "Card";
 const dragSpec = {
-  beginDrag(props, monitor, component){
+  beginDrag(props, monitor, component) {
     let dragValue, dragSuite;
-    if(props.cardsToRender && props.cardsToRender.length > 0){
+    if (props.cardsToRender && props.cardsToRender.length > 0) {
       dragValue = props.cardsToRender[0].value;
       dragSuite = props.cardsToRender[0].suite;
     }
@@ -20,12 +34,14 @@ const dragSpec = {
     };
   },
   endDrag(props, monitor) {
-		const item = monitor.getItem()
-		const dropResult = monitor.getDropResult()
+    const item = monitor.getItem();
+    const dropResult = monitor.getDropResult();
 
-    if(dropResult){
-      let cardsArray = props.stack == STACKS.PLAY ?
-      props.cardsToRender : props.cardsToRender.slice(0,1);
+    if (dropResult) {
+      let cardsArray =
+        props.stack == STACKS.PLAY
+          ? props.cardsToRender
+          : props.cardsToRender.slice(0, 1);
       let actionObject = {
         dropStack: dropResult.stack,
         dropIndex: dropResult.dropIndex,
@@ -34,23 +50,21 @@ const dragSpec = {
         sourceStack: props.stack,
         sourceStackIndex: props.stackKey,
         sourceParentSuite: props.parentSuite
-      }
+      };
       props.actions.moveCard(actionObject);
-      if(props.stack == STACKS.PLAY)
+      if (props.stack == STACKS.PLAY)
         props.actions.openCardFace(props.stackKey);
-      if(props.stack == STACKS.DRAW)
-        props.actions.reduceActiveDrawCount();
+      if (props.stack == STACKS.DRAW) props.actions.reduceActiveDrawCount();
     }
-	},
-  canDrag(props,monitor) {
-    if(props.stack == STACKS.DRAW){
+  },
+  canDrag(props, monitor) {
+    if (props.stack == STACKS.DRAW) {
       return props.isLastCard;
     }
-    if(props.stack == STACKS.PLAY){
-      if(props.cardsToRender && props.cardsToRender.length > 0) {
+    if (props.stack == STACKS.PLAY) {
+      if (props.cardsToRender && props.cardsToRender.length > 0) {
         let card = props.cardsToRender[0];
-        if(card.face != CARD_FACE.CLOSED)
-          return true;
+        if (card.face != CARD_FACE.CLOSED) return true;
       }
       return false;
     }
@@ -63,78 +77,106 @@ const dragCollect = (connect, monitor) => {
     connectDragPreview: connect.dragPreview(),
     isDragging: monitor.isDragging()
   };
-}
+};
 
 const dropSpec = {
-  canDrop(props,monitor){
+  canDrop(props, monitor) {
     const item = monitor.getItem();
-    if(monitor.didDrop())
-      return false;
+    if (monitor.didDrop()) return false;
 
     let cardsArray = props.cardsToRender;
-    if(cardsArray && cardsArray.length>1)
-      return false;
+    if (cardsArray && cardsArray.length > 1) return false;
 
-    const currentCard = cardsArray && cardsArray.length > 0 ? cardsArray[0] : {};
-    if(props.stack == STACKS.PLAY){
-      if(SUITE_COLOR[item.dragSuite] != SUITE_COLOR[currentCard.suite] &&
-      CARD_VALUES[currentCard.value] - CARD_VALUES[item.dragValue] == 1)
+    const currentCard =
+      cardsArray && cardsArray.length > 0 ? cardsArray[0] : {};
+    if (props.stack == STACKS.PLAY) {
+      if (
+        SUITE_COLOR[item.dragSuite] != SUITE_COLOR[currentCard.suite] &&
+        CARD_VALUES[currentCard.value] - CARD_VALUES[item.dragValue] == 1
+      )
         return true;
 
-      if(props.emptyStack && CARD_VALUES[item.dragValue] == CARD_VALUES.KING)
+      if (props.emptyStack && CARD_VALUES[item.dragValue] == CARD_VALUES.KING)
         return true;
     }
 
-    if(props.stack == STACKS.SUITE){
-      if(item.dragSuite == props.parentSuite){
-        if(cardsArray.length == 0 && CARD_VALUES[item.dragValue] == CARD_VALUES.ACE)
+    if (props.stack == STACKS.SUITE) {
+      if (item.dragSuite == props.parentSuite) {
+        if (
+          cardsArray.length == 0 &&
+          CARD_VALUES[item.dragValue] == CARD_VALUES.ACE
+        )
           return true;
-        let topCard = cardsArray.length >0 ? cardsArray[0] : {};
-        if(CARD_VALUES[item.dragValue] - CARD_VALUES[topCard.value] == 1)
+        let topCard = cardsArray.length > 0 ? cardsArray[0] : {};
+        if (CARD_VALUES[item.dragValue] - CARD_VALUES[topCard.value] == 1)
           return true;
       }
     }
 
     return false;
   },
-  drop(props, monitor, component){
-    return {stack: props.stack,
-            dropIndex: props.stackKey,
-            parentSuite: props.parentSuite};
+  drop(props, monitor, component) {
+    return {
+      stack: props.stack,
+      dropIndex: props.stackKey,
+      parentSuite: props.parentSuite
+    };
   }
 };
 
 const dropCollect = (connect, monitor) => {
   return {
     connectDropTarget: connect.dropTarget(),
-	   isOver: monitor.isOver(),
-	    canDrop: monitor.canDrop(),
+    isOver: monitor.isOver(),
+    canDrop: monitor.canDrop()
   };
-}
+};
+
+const previewCollect = monitor => {
+  return {
+    sourceOffset: monitor.getSourceClientOffset(),
+    initialClientOffset: monitor.getInitialSourceClientOffset()
+  };
+};
 
 class CardWrapper extends Component {
-
-  render(){
-    const {dragValue, dragSuite, connectDragSource, connectDropTarget, isDragging} = this.props;
+  render() {
+    const {
+      dragValue,
+      dragSuite,
+      connectDragSource,
+      connectDropTarget,
+      isDragging
+    } = this.props;
     let cardWrapperClass = "cardWrapper";
-    if(this.props.stack == STACKS.PLAY)
+    if (this.props.stack == STACKS.PLAY)
       cardWrapperClass = `${cardWrapperClass} playStack`;
-    else if(this.props.stack == STACKS.SUITE)
+    else if (this.props.stack == STACKS.SUITE)
       cardWrapperClass = `${cardWrapperClass} suiteStack`;
-    const opacity = isDragging ? 0.4:1;
-    return connectDragSource(connectDropTarget(<div style={{opacity}} className={cardWrapperClass}>
-              <Card {...this.props}/>
-            </div>));
+    const opacity = isDragging ? { display: "none" } : {};
+    if (isDragging) {
+      return <CardDragPreview stack={this.props.stack} isDragging />;
+    }
+    return connectDragSource(
+      connectDropTarget(
+        <div className={cardWrapperClass}>
+          <Card {...this.props} />
+        </div>
+      )
+    );
   }
 }
 
 CardWrapper = DragSource(types, dragSpec, dragCollect)(CardWrapper);
 CardWrapper = DropTarget(types, dropSpec, dropCollect)(CardWrapper);
 
-const mapDispatchToProps = (dispatch) => {
+const mapDispatchToProps = dispatch => {
   return {
-    actions: bindActionCreators(actions,dispatch)
-  }
-}
+    actions: bindActionCreators(actions, dispatch)
+  };
+};
 
-export default connect(null,mapDispatchToProps)(CardWrapper);
+export default connect(
+  null,
+  mapDispatchToProps
+)(CardWrapper);

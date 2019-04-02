@@ -155,7 +155,7 @@ class CardWrapper extends Component {
       cardWrapperClass = `${cardWrapperClass} suiteStack`;
     const opacity = isDragging ? { display: "none" } : {};
     if (isDragging) {
-      return <CardDragPreview isDragging />;
+      return <CardDragPreview stack={this.props.stack} isDragging />;
     }
     return connectDragSource(
       connectDropTarget(

@@ -43,6 +43,12 @@ body {
   }
 }
 
+@media screen and (min-width: 950px) {
+  .cardWrapper.playStack {
+    top: -95px;
+  }
+}
+
 .separator {
   display: inline-block;
   &.vertical {
@@ -58,6 +64,7 @@ body {
   display: inline-block;
   width: $card_width;
   max-width: $card_max_width;
+  max-height: 50vh;
   & .cardImage {
     max-width: $hundred_percent;
   }

@@ -4,7 +4,6 @@ Standard solitaire rules apply, click the deck on top left corner to draw cards.
 
 # Dev notes
 Redux is employed here to maintain state of the app and update it based on events.  
-For drag and drop support, react-dnd is doing the lifting augmented by touch-backend. Touch-backend was preferred over HTML5 due to touch support, at the expense of additional configuration.
 
 ### Footnote for future self
 initialSetup branch has initial setup of react with Webpack. advancedSetup branch has additional setup which includes redux and webpack-dev-server with HMR.  
